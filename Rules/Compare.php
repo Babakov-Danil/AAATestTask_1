@@ -12,6 +12,7 @@ abstract class AbstractCompare implements CompareInterface, BiggerInterface, Low
 	public $allowedOperators = [];
 
 	/**
+	 * Задаёт название ключа
 	 * @param string|array $name
 	 * @return void
 	 */
@@ -25,6 +26,7 @@ abstract class AbstractCompare implements CompareInterface, BiggerInterface, Low
 		$this->name = $exploded[0];
 	}
 
+	//Проверяет возможно ли вызвыать метод
 	public function handle(array $db_value, string $operator, mixed $value): bool
 	{
 		if (in_array($operator, $this->allowedOperators)) {
@@ -33,6 +35,7 @@ abstract class AbstractCompare implements CompareInterface, BiggerInterface, Low
 		return false;
 	}
 
+	// Метод равенства
 	public function isEqual(array $db_value, mixed $rule_value): bool
 	{
 		if (is_array($this->name)) {
@@ -47,6 +50,7 @@ abstract class AbstractCompare implements CompareInterface, BiggerInterface, Low
 		return $db_value[$this->name] == $rule_value;
 	}
 
+	// Метод неравенства
 	public function isNotEqual(array $db_value, mixed $rule_value): bool
 	{
 
@@ -62,6 +66,7 @@ abstract class AbstractCompare implements CompareInterface, BiggerInterface, Low
 		return $db_value[$this->name] != $rule_value;
 	}
 
+	// Метод если больше
 	public function isBigger(array $db_value, mixed $rule_value): bool
 	{
 		if (is_array($this->name)) {
@@ -77,6 +82,7 @@ abstract class AbstractCompare implements CompareInterface, BiggerInterface, Low
 		return $db_value[$this->name] > $rule_value;
 	}
 
+	// Меод если меньше
 	public function isLower(array $db_value, mixed $rule_value): bool
 	{
 		if (is_array($this->name)) {
@@ -93,10 +99,12 @@ abstract class AbstractCompare implements CompareInterface, BiggerInterface, Low
 	}
 }
 
+// Порождающий класс
 class Compare
 {
 	private $rule;
 
+	//Указываем какой тип сравнения используем
 	public function setRule(string $rule): void
 	{
 		$this->rule = new (__NAMESPACE__ . '\\' . $rule)();

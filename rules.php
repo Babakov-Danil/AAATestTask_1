@@ -31,6 +31,7 @@ function response(mixed $response, int $code = 200)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$_POST = json_decode(file_get_contents('php://input'), true);
 
+	// запросы
 	switch (array_keys($_POST)[0]) {
 		case 'createRuleSet':
 			$action = new CreateRuleSetAction;
@@ -55,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	response([]);
 }
+
 
 $agencyIdOptions = new Agencies()->getAll();
 $hotelsIdOptions = new Hotels()->getAll();

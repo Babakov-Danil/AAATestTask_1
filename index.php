@@ -19,9 +19,13 @@ echo '<a href="/rules.php">Edit Rules</a> <BR><BR>';
 
 $hotel_id = $_GET['hotel_id'] ?? 1; // отель для которого делаем проверку
 
+// Модель отелей
 $hotels = new Hotels;
+
+//Получить все отели
 $allHotels = $hotels->getAll();
 
+// Селект выбора отеля
 echo "<label>
 <span>Hotel: </span>
 <select id='hotel_id'>";
@@ -42,8 +46,10 @@ echo "</select>
 </script>
 ";
 
+// Инициализация экшна на проверку правил по отелю
 $action = new CompareAction(new Compare, new AgencyRules, $hotels, RulesKeys::cases(), Operators::cases());
 
+// Запуск экшена
 $action($hotel_id);
 
 ?>
