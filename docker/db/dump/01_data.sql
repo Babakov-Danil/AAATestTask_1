@@ -63,3 +63,28 @@ INSERT INTO `agency_hotel_options` (`id`,`hotel_id`,`agency_id`,`percent`,`is_bl
 (18,8,2,12,0,0,0),
 (19,9,2,10,1,0,0),
 (20,10,2,14,1,0,0);
+
+INSERT INTO `agency_rules` (`id`, `name`, `manager_text`, `agency_id`, `hotel_id`, `active`) VALUES
+(1,	'Test 1',	'Text for manager test 123 ',	1,	1,	1),
+(3,	'Test 2',	'Some text for manager 123 ',	2,	1,	1),
+(4,	'Test 3',	'CHECK: ',	1,	6,	1),
+(5,	'Test 4',	'ATTENTION: ',	1,	5,	1),
+(6,	'Test 5',	'Some text for manager',	2,	5,	1),
+(7,	'Test 6',	'cringy: ',	1,	2,	1),
+(8,	'Test 7',	'coca cola: ',	2,	2,	1);
+
+INSERT INTO `agency_rules_condition` (`id`, `rule_id`, `rule_type`, `rule_operator`, `rule_value`, `active`) VALUES
+(1,	1,	0,	0,	'1',	1),
+(2,	3,	0,	0,	'1',	1),
+(3,	1,	6,	0,	'0',	1),
+(4,	5,	6,	0,	'1',	1),
+(5,	5,	0,	0,	'1',	1),
+(6,	6,	6,	0,	'0',	1),
+(7,	6,	5,	0,	'1',	1),
+(8,	5,	3,	0,	'10',	1),
+(9,	5,	8,	0,	'0',	1),
+(10,	7,	0,	0,	'1',	1),
+(11,	8,	0,	0,	'1',	1),
+(12,	7,	6,	0,	'0',	1),
+(13,	8,	6,	0,	'0',	1),
+(14,	7,	4,	0,	'1',	1);

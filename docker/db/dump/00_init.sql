@@ -69,3 +69,31 @@ CREATE TABLE `hotel_agreements` (
  FOREIGN KEY (`company_id`) REFERENCES companies(`id`),
  FOREIGN KEY (`hotel_id`) REFERENCES hotels(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COMMENT='Договоры между компанией и отелем';
+
+DROP TABLE IF EXISTS `agency_rules`;
+CREATE TABLE `agency_rules` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL,
+  `manager_text` varchar(256) NOT NULL,
+  `agency_id` int unsigned NOT NULL,
+  `hotel_id` int unsigned NOT NULL,
+  `active` tinyint unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `hotel_id` (`hotel_id`),
+  KEY `agency_id` (`agency_id`),
+  CONSTRAINT `agency_rules_ibfk_7` FOREIGN KEY (`hotel_id`) REFERENCES `hotels` (`id`),
+  CONSTRAINT `agency_rules_ibfk_8` FOREIGN KEY (`agency_id`) REFERENCES `agencies` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COMMENT='Правило для отеля от агенства'
+
+DROP TABLE IF EXISTS `agency_rules_condition`;
+CREATE TABLE `agency_rules_condition` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `rule_id` int unsigned NOT NULL,
+  `rule_type` int NOT NULL,
+  `rule_operator` int NOT NULL,
+  `rule_value` varchar(8) NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `rule_id` (`rule_id`),
+  CONSTRAINT `agency_rules_condition_ibfk_2` FOREIGN KEY (`rule_id`) REFERENCES `agency_rules` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COMMENT='Список условий для правила'
